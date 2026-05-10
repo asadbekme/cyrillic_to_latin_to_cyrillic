@@ -1,8 +1,15 @@
 import telebot
+import os
+
 from detect_script import detect_script
 from transliterate import to_cyrillic, to_latin
+from dotenv import load_dotenv
 
-TOKEN = "8509701928:AAGArD-3-SxHlJKcYi9OMNubOeiUMvlzjlA"
+load_dotenv()
+
+TOKEN = os.getenv("BOT_TOKEN")
+if not TOKEN:
+    raise ValueError("BOT_TOKEN topilmadi! .env faylni tekshiring.")
 bot = telebot.TeleBot(TOKEN, parse_mode=None) 
 
 @bot.message_handler(commands=['start', 'help'])
